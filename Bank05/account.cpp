@@ -149,7 +149,6 @@ void Account::query(Date begin_date, Date end_date)
     multimap<Date,AccountRecord>::iterator it;
     for(it=recordMap.begin();it!=recordMap.end();it++)
     {
-        //todo
         it->second.show();
     }
 }
