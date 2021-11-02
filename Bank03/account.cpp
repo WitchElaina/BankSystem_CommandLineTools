@@ -81,7 +81,7 @@ Account::Account(Date m_date,string m_id)
 
     // 打印创建成功信息
     m_date.show();
-    cout<<"\t#"<<id+" created"<<endl;
+    cout<<"\t\t#"<<id+" created"<<endl;
 }
 
 // 账户变动记录辅助函数
@@ -92,7 +92,7 @@ void Account::record(Date m_date, double m_amount,string m_desc)
     total+=m_amount;
     // 打印流水信息
     m_date.show();
-    cout<<"\t#"<<id<<"\t"<<m_amount<<"\t"<<balance<<"\t"+m_desc<<endl;    
+    cout<<"\t\t#"<<id<<"\t\t"<<m_amount<<"\t"<<balance<<"\t"+m_desc<<endl;    
 }
 
 // 获取用户ID
@@ -153,11 +153,29 @@ void SavingsAccount::withdraw(Date m_date,double m_amount,string m_desc)
     record(m_date, m_amount, m_desc);   
 }
 
+// 结算利息函数
+void SavingsAccount::settle(Date m_date)
+{
+    // 利息
+    double interest;
 
+    // 更新累加器
+    acc.change(m_date, getBalance());
+
+    // 计算总存款时间
+
+    // 计算利息
+    interest=set_precision_2(acc.getSum(m_date)/(SAVING_ACCOUNT_PERIOD+1)*rate);
+
+    // 利息记入本金
+    //  使用存款函数, 将利息存入本金
+    deposit(m_date, interest, "interest");
+
+}
 // 打印账户信息
 void SavingsAccount::show()
 {
-    cout<<getID()<<"\t"<<"Balance: "<<getBalance();   
+    cout<<getID()<<"\t\t"<<"Balance: "<<getBalance();   
 }
 
 // 信用卡类方法
@@ -266,7 +284,7 @@ void CreditAccount::settle(Date m_date)
 // 打印账户信息
 void CreditAccount::show()
 {
-    cout<<getID()<<"\t"<<"Balance: "<<getBalance()<<"\tAvailable credit:"<<getCredit();   
+    cout<<getID()<<"\t\t"<<"Balance: "<<getBalance()<<"\tAvailable credit:"<<getCredit();   
 }
 
 

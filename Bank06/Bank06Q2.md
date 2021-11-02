@@ -27,3 +27,7 @@ do
 } while(cmd != 'e')
 ````
 
+$$
+\varepsilon
+$$
+
