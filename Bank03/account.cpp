@@ -267,9 +267,10 @@ void CreditAccount::settle(Date m_date)
 
     // 计算总存款时间
 
-    // 计算利息
+    // 计算利息    
     interest=set_precision_2(acc.getSum(m_date)*rate);
-    withdraw(m_date, -interest, "interest");
+    if(interest)
+        withdraw(m_date, -interest, "interest");
     
     // 判断是否需要交年费
     if(m_date.get_year()!=a_date.get_year())
